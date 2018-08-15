@@ -1,0 +1,69 @@
+$button-color: (
+  'action': (
+    'main': #28a745,
+    'hover': #218838,
+    'text': #ffffff,
+    'shadow': rgba(40, 167, 69, 0.5)
+    #28a745
+  ),
+  'todo-high': (
+    'main': #dc3545,
+    'hover': #c82333,
+    'text': #ffffff,
+    'shadow': rgba(220, 53, 69, 0.5)
+  ),
+  'todo-normal': (
+    'main': #ffc107,
+    'hover': #e0a800,
+    'text': #000000,
+    'shadow': rgba(255, 193, 7, 0.5)
+  ),
+  'todo-low': (
+    'main': #17a2b8,
+    'hover': #138496,
+    'text': #ffffff,
+    'shadow': rgba(23, 162, 184, 0.5)
+  )
+);
+
+@each $key, $value in $button-color {
+  .btn-#{$key} {
+      color: map-get($value, 'text');
+      background-color: map-get($value, 'main');
+      border-color: map-get($value, 'main');
+      margin-left: 0.5rem !important;
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: 1.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+      &:focus {
+          outline: 0;
+      }
+
+      &:hover {
+          color: map-get($value, 'text');
+          background-color: map-get($value, 'hover');
+      }
+
+      &:not(:disabled) {
+          cursor: pointer;
+      }
+
+      &.focus {
+          box-shadow: 0 0 0 0.25rem map-get($value, 'shadow');
+      }
+
+      &:disabled {
+        opacity: 0.65;
+      }
+  }
+}

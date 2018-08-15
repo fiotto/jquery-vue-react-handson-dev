@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" type="text/css" href="style/style.css">
+
+  <%_ for (let value of scripts) { _%>
+  <script crossorigin src="<%= value %>"></script>
+  <%_ } _%>
+
+  <title><%= title %>のサンプル</title>
+</head>
+<body>
+  <div class="container">
+    <h1><span>XXX</span>のサンプル</h1>
+
+    <div class="row">
+      <input type="text" class="form-control"/>
+      <button type="button" class="btn-action">追加</button>
+    </div>
+
+    <div class="tmp-space">
+      入力値 : <span>掃除</span>
+    </div>
+
+    <div>
+      <table class="table-bordered">
+        <thead>
+          <tr>
+            <th>重要度大</th>
+            <th>重要度中</th>
+            <th>重要度小</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>
+                <button type="button" class="btn-todo-high focus">掃除</button>
+              </p>
+              <p>
+                <button type="button" class="btn-todo-high">洗濯</button>
+              </p>
+              <p>
+                <button type="button" class="btn-todo-high">炊事</button>
+              </p>
+            </td>
+            <td>
+              <p>
+                <button type="button" class="btn-todo-normal focus">買い物</button>
+              </p>
+              <p>
+                <button type="button" class="btn-todo-normal">草刈り</button>
+              </p>
+              <p>
+                <button type="button" class="btn-todo-normal">アイロン</button>
+              </p>
+            </td>
+            <td>
+              <p>
+                <button type="button" class="btn-todo-low focus">窓ふき</button>
+              </p>
+              <p>
+                <button type="button" class="btn-todo-low">振り込み</button>
+              </p>
+              <p>
+                <button type="button" class="btn-todo-low">家計簿管理</button>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tmp-space">
+      重要度の変更を表示 : <span>true</span>
+    </div>
+
+    <div>
+      <div class="content-center">
+        <div class="card">
+          <p class="text-center">
+            <span class="color-red">洗濯</span>の重要度を
+          </p>
+          <p>
+            <button type="button" class="btn-action" disabled>上げる</button>
+            <button type="button" class="btn-action focus">下げる</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script<%_　if(typeof scriptType !== 'undefined'){　%> type="<%= scriptType %>"<%_　}　_%>>
+    //ここに記述する
+
+  </script>
+</body>
+</html>

@@ -43,7 +43,7 @@ module.exports = (env, argv) => {
       plugins: [
         new FixStyleOnlyEntriesPlugin(),
         new MiniCssExtractPlugin({
-          filename: './style/[name].css',
+          filename: './css/[name].css',
         })
       ]
     },

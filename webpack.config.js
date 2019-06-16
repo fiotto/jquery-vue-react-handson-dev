@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries'); 
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const TEMPLETE_LIST = 
@@ -45,7 +46,10 @@ module.exports = (env, argv) => {
         new MiniCssExtractPlugin({
           filename: './css/[name].css',
         })
-      ]
+      ],
+      optimization: {
+        minimizer: [new OptimizeCSSAssetsPlugin({})],
+      },
     },
     {
       entry  : TEMPLETE_LIST,

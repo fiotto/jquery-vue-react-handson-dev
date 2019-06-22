@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries'); 
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const TEMPLETE_LIST = 
     ['index', 'jquery', 'react', 'vue']
@@ -13,7 +14,8 @@ module.exports = (env, argv) => {
   return [
     {
       entry: {
-        style: './src/style/style.scss'
+        style: './src/style/style.scss',
+        top: './src/style/top.scss'
       },
       output: {
         path: path.resolve(__dirname, 'public')
@@ -49,29 +51,44 @@ module.exports = (env, argv) => {
       ],
       optimization: {
         minimizer: [new OptimizeCSSAssetsPlugin({})],
-      },
+      }
     },
     {
-      entry  : TEMPLETE_LIST,
-      output : {
-        path     : path.join(__dirname, 'public'),
-        filename : '[name]',
+      entry: TEMPLETE_LIST,
+      output: {
+        path: path.join(__dirname, 'public'),
+        filename: '[name]',
       },
-      module : {
-        rules : [{
-          test : /\.ejs$/,
-          use  : [
-            'html-loader',
-            'ejs-html-loader'
-          ]
-        }]
+      module: {
+        rules: [
+          {
+            test: /\.ejs$/,
+            use: [
+              'html-loader',
+              'ejs-html-loader'
+            ]
+          },
+          {
+            test: /\.(png|jpe?g|gif)$/i,
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath : 'images/'
+            }
+          }
+        ]
       },
-      plugins : Object.keys(TEMPLETE_LIST).map(
-        (value, index) => new HtmlWebpackPlugin({
-          template : TEMPLETE_LIST[value],
-          filename : value
-        })
-      )
+      plugins: [
+        ...Object.keys(TEMPLETE_LIST).map(
+          (value, index) => new HtmlWebpackPlugin({
+            template: TEMPLETE_LIST[value],
+            filename: value
+          })
+        ),
+        new CopyWebpackPlugin([
+          {from:'./src/images',to:'images'} 
+        ])
+      ]
     }
   ]
 };

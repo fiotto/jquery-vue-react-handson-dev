@@ -4,7 +4,6 @@ $button-color: (
     'hover': #218838,
     'text': #ffffff,
     'shadow': rgba(40, 167, 69, 0.5)
-    #28a745
   ),
   'todo-high': (
     'main': #dc3545,
@@ -58,7 +57,7 @@ $button-color: (
           cursor: pointer;
       }
 
-      &.focus {
+      &.selected {
           box-shadow: 0 0 0 0.25rem map-get($value, 'shadow');
       }
 
